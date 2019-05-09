@@ -1,3 +1,5 @@
+import * as Api from './Api';
+
 /**
  * This function appends one or more HTML elements (childs) to HTML element (parent).
  * @param {HTMLElement} parent - HTML parent element
@@ -147,3 +149,36 @@ export const addClass = (element, className) => {
 
 	element.className += classes.find(cls => cls === className) ? '' : ` ${className}`;
 };
+
+/**
+ * This function will create and send POST request.
+ * @param {string} url - Requested url.
+ * @param {{data: object, resolve: function, reject: function, async: boolean}} config - Configuration of request.
+ * @example
+ * const config = {
+ * 		data: {message: 'Hi!'},
+ * 		resolve: response => console.log(response),
+ * 		reject: error => console.log(error),
+ * 		async: true
+ * };
+ *
+ * const request = get('www.bachrony.com/something', config);
+ * @return {XMLHttpRequest}
+ */
+export const post = (url, config = {}) => Api._request('POST', url, config);
+
+/**
+ * This function will create and send GET request.
+ * @param {string} url - Requested url.
+ * @param {{data: object, resolve: function, reject: function, async: boolean}} config - Configuration of request.
+ * @example
+ * const config = {
+ * 		resolve: response => console.log(response),
+ * 		reject: error => console.log(error),
+ * 		async: true
+ * };
+ *
+ * const request = get('www.bachrony.com/something', config);
+ * @return {XMLHttpRequest}
+ */
+export const get = (url, config = {}) => Api._request('GET', url, config);
