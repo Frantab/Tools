@@ -1,4 +1,5 @@
 import * as Tools from '../Tools';
+import * as Api from '../Api';
 
 describe('Test of appendChilds.', () => {
 	test('Function appendChilds should append 1 child.', () => {
@@ -235,5 +236,27 @@ describe('Test of addClass.', () => {
 		Tools.addClass(div, 'test1');
 
 		expect(div.className).toBe('test1 test2 test3');
+	});
+});
+
+describe('Test of post.', () => {
+	test('Post should call _request.', () => {
+		const spyRequest = jest.spyOn(Api, '_request');
+
+		spyRequest.mockImplementation(() => 'test');
+
+		expect(Tools.post('www.test.cz')).toBe('test');
+		expect(spyRequest).toHaveBeenCalledWith('POST', 'www.test.cz', {});
+	});
+});
+
+describe('Test of get.', () => {
+	test('Get should call _request.', () => {
+		const spyRequest = jest.spyOn(Api, '_request');
+
+		spyRequest.mockImplementation(() => 'test');
+
+		expect(Tools.get('www.test.cz')).toBe('test');
+		expect(spyRequest).toHaveBeenCalledWith('GET', 'www.test.cz', {});
 	});
 });
