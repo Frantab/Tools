@@ -26,14 +26,14 @@ export const _process = (request, resolve, reject) => {
  * @private
  */
 export const _request = (method, url, customConfig) => {
-    const request = new XMLHttpRequest();
-    const {data, resolve, reject, async} = {
-        data: {},
-        resolve: () => {},
-        reject: () => {},
-        async: true,
-        ...customConfig
-    };
+	const request = new XMLHttpRequest();
+	const {data, resolve, reject, async} = {
+		data: {},
+		resolve: () => {},
+		reject: () => {},
+		async: true,
+		...customConfig
+	};
 
 	request.open(method, url, async);
 	request.setRequestHeader('Content-Type', 'application/json');
