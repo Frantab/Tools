@@ -12,10 +12,12 @@ import * as Api from './Api';
  * appendChilds(parent, child1, child2);
  */
 export const appendChilds = (parent, ...childs) => {
-	childs.forEach(child => {
-		if (child && parent) {
+	return !parent ? false : !childs.some(child => {
+		if (child) {
 			parent.appendChild(child);
+			return false;
 		}
+		return true;
 	});
 };
 
@@ -131,7 +133,7 @@ export const removeClass = (element, className) => {
 		return resultClassName;
 	}, '');
 
-	element.className = result === '' ? element.className : result;
+	element.className = result === element.className ? element.className : result;
 };
 
 /**
@@ -165,7 +167,7 @@ export const addClass = (element, className) => {
  * const request = get('www.bachrony.com/something', config);
  * @return {XMLHttpRequest}
  */
-export const post = (url, config = {}) => Api._request('POST', url, config);
+export const post = (url, config = {}) => Api.request('POST', url, config);
 
 /**
  * This function will create and send GET request.
@@ -181,4 +183,4 @@ export const post = (url, config = {}) => Api._request('POST', url, config);
  * const request = get('www.bachrony.com/something', config);
  * @return {XMLHttpRequest}
  */
-export const get = (url, config = {}) => Api._request('GET', url, config);
+export const get = (url, config = {}) => Api.request('GET', url, config);

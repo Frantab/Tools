@@ -32,6 +32,29 @@ describe('Test of appendChilds.', () => {
 		expect(child1.parentNode === parent).toBeTruthy();
 		expect(child2.parentNode === parent).toBeTruthy();
 	});
+
+	test('Function appendChilds should return false because of undefined parent.', () => {
+		const parent = undefined;
+		const p = document.createElement('p');
+
+		expect(Tools.appendChilds(parent, p)).toBeFalsy();
+	});
+
+	test('Function appendChilds should return false because of one undefined child.', () => {
+		const parent = document.body;
+		const p1 = document.createElement('p');
+		const p2 = undefined;
+
+		expect(Tools.appendChilds(parent, p1, p2)).toBeFalsy();
+	});
+
+	test('Function appendChilds should return false because of one undefined child.', () => {
+		const parent = document.body;
+		const p1 = document.createElement('p');
+		const p2 = document.createElement('p');
+
+		expect(Tools.appendChilds(parent, p1, p2)).toBeTruthy();
+	});
 });
 
 describe('Test of createWholeElement.', () => {
@@ -77,6 +100,12 @@ describe('Test of createWholeElement.', () => {
 		});
 
 		expect(element.getAttribute('data-id')).toBe('test');
+	});
+
+	test('Function createWholeElement should create div element with no specs.', () => {
+		const element = Tools.createWholeElement('div');
+
+		expect(element.nodeName).toBe('DIV');
 	});
 });
 
@@ -181,6 +210,14 @@ describe('Test of dispatchCustomEvent.', () => {
 	test('Function dispatchCustomEvent should return false after unsuccessfully dispatch.', () => {
 		expect(Tools.dispatchCustomEvent('testEvent', {message: 'test'})).toBeTruthy();
 	});
+
+	test('Function dispatchCustomEvent should dispatch event and eventCallback should be called ones.', () => {
+		const eventCallback = jest.fn();
+
+		window.addEventListener('testEvent', eventCallback);
+		Tools.dispatchCustomEvent('testEvent');
+		expect(eventCallback).toHaveBeenCalledTimes(1);
+	});
 });
 
 describe('Test of nodeListToArray.', () => {
@@ -240,8 +277,8 @@ describe('Test of addClass.', () => {
 });
 
 describe('Test of post.', () => {
-	test('Post should call _request.', () => {
-		const spyRequest = jest.spyOn(Api, '_request');
+	test('Post should call request.', () => {
+		const spyRequest = jest.spyOn(Api, 'request');
 
 		spyRequest.mockImplementation(() => 'test');
 
@@ -252,7 +289,7 @@ describe('Test of post.', () => {
 
 describe('Test of get.', () => {
 	test('Get should call _request.', () => {
-		const spyRequest = jest.spyOn(Api, '_request');
+		const spyRequest = jest.spyOn(Api, 'request');
 
 		spyRequest.mockImplementation(() => 'test');
 

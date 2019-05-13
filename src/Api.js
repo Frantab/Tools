@@ -25,8 +25,8 @@ export const _process = (request, resolve, reject) => {
  * @return {XMLHttpRequest}
  * @private
  */
-export const _request = (method, url, customConfig) => {
-	const request = new XMLHttpRequest();
+export const request = (method, url, customConfig) => {
+	const req = new XMLHttpRequest();
 	const {data, resolve, reject, async} = {
 		data: {},
 		resolve: () => {},
@@ -35,23 +35,23 @@ export const _request = (method, url, customConfig) => {
 		...customConfig
 	};
 
-	request.open(method, url, async);
-	request.setRequestHeader('Content-Type', 'application/json');
-	request.onerror = error => reject(error);
+	req.open(method, url, async);
+	req.setRequestHeader('Content-Type', 'application/json');
+	req.onerror = error => reject(error);
 
 	if (async) {
-		request.onload = () => _process(request, resolve, reject);
+		req.onload = () => process(req, resolve, reject);
 	}
 
 	if (method === 'POST' && data) {
-		request.send(JSON.stringify(data));
+		req.send(JSON.stringify(data));
 	} else {
-		request.send();
+		req.send();
 	}
 
 	if (!async) {
-		_process(request, resolve, reject);
+		process(req, resolve, reject);
 	}
 
-	return request;
+	return req;
 };

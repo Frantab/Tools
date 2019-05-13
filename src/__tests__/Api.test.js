@@ -1,4 +1,4 @@
-import * as Api from '../Api';
+import * as Api from '../../Api';
 
 describe('Test of process.', () => {
 	const reject = jest.fn();
@@ -56,24 +56,18 @@ describe('Test of request.', () => {
 	});
 
 	test('Inside of request function should be called open function.', () => {
-		Api._request('POST', 'www.seznam.cz', {}, resolve, reject, true);
+		Api.request('POST', 'www.seznam.cz', {}, resolve, reject, true);
 		expect(open).toHaveBeenCalled();
 	});
 
 	test('Inside of request function should be called setRequestHeader function.', () => {
-		Api._request('POST', 'www.seznam.cz', {}, resolve, reject, true);
+		Api.request('POST', 'www.seznam.cz', {}, resolve, reject, true);
 		expect(setRequestHeader).toHaveBeenCalled();
 	});
 
 	test('Inside of request function should be called send function.', () => {
-		Api._request('POST', 'www.seznam.cz', {}, resolve, reject, true);
-		Api._request('GET', 'www.seznam.cz', {}, resolve, reject, true);
-		expect(send).toHaveBeenCalledTimes(2);
-	});
-
-	test('Inside of request function should be called send function.', () => {
-		Api._request('POST', 'www.seznam.cz', {}, resolve, reject, true);
-		Api._request('GET', 'www.seznam.cz', {}, resolve, reject, true);
+		Api.request('POST', 'www.seznam.cz', {}, resolve, reject, true);
+		Api.request('GET', 'www.seznam.cz', {}, resolve, reject, true);
 		expect(send).toHaveBeenCalledTimes(2);
 	});
 });
