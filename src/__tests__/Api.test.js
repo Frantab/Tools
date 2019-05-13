@@ -1,4 +1,4 @@
-import * as Api from '../../Api';
+import * as Api from '../Api';
 
 describe('Test of process.', () => {
 	const reject = jest.fn();
