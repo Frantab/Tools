@@ -1,11 +1,10 @@
 {
   "name": "@brandund/tools",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Javascript library full of useful functions.",
   "main": "src/Tools.js",
   "scripts": {
-    "test": "eslint src & jest",
-    "kak": "jest --config"
+    "test": "eslint src & jest"
   },
   "repository": {
     "type": "git",
