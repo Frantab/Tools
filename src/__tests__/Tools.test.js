@@ -297,3 +297,29 @@ describe('Test of get.', () => {
 		expect(spyRequest).toHaveBeenCalledWith('GET', 'www.test.cz', {});
 	});
 });
+
+describe('Test of monkeyPatch.', () => {
+	test('Function monkeyPatch should return null because of undefined an object.', () => {
+		expect(Tools.monkeyPatch(undefined, undefined, undefined)).toBe(null);
+	});
+
+	test('Function monkeyPatch should return null because of undefined variable of an object.', () => {
+		expect(Tools.monkeyPatch({}, 'test', undefined)).toBe(null);
+	});
+
+	test('Function monkeyPatch should return null because type of variable of an object is not function.', () => {
+		expect(Tools.monkeyPatch({test: 'test'}, 'test', undefined)).toBe(null);
+	});
+
+	test('Function monkeyPatch should return null because type of newImplementation is not a function.', () => {
+		expect(Tools.monkeyPatch({test: () => 'test'}, 'test', undefined)).toBe(null);
+	});
+
+	test('Function monkeyPatch should return original implementation of test:b() => "test".', () => {
+		window.test = () => 'test';
+		const oldTest = window.test;
+
+		expect(Tools.monkeyPatch(window, 'test', () => 'newTest')).toEqual(oldTest);
+		expect(window.test()).toBe('newTest');
+	});
+});
