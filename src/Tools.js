@@ -184,3 +184,34 @@ export const post = (url, config = {}) => Api.request('POST', url, config);
  * @return {XMLHttpRequest}
  */
 export const get = (url, config = {}) => Api.request('GET', url, config);
+
+/**
+ * This function rewrites existing variable of an object.
+ * This function can rewrite only variables which are type of function.
+ * @param {object} object - Object (path) to variable which will be re-setted.
+ * @param {string} key - Name of variable of an object. This variable will be re-setted.
+ * @param {function} newImplementation - This function will be new implementation of object[key].
+ * @returns {object} original re-setted object.
+ */
+export const monkeyPatch = (object, key, newImplementation) => {
+	try {
+		if (!object || !object[key]) {
+			throw new Error(`Variable "${key}" of ${object} does not exist.`);
+		}
+		/** @type {function} */
+		const original = object[key];
+
+		if (typeof original !== 'function') {
+			throw new TypeError(`Variable "${key}" of ${object} is not a function. It is a "${typeof original}"`);
+		}
+		if (typeof newImplementation !== 'function') {
+			throw new TypeError(`newImplementation "${newImplementation}" is not a function. It is a "${typeof original}"`);
+		}
+
+		object[key] = newImplementation;
+		return original;
+	} catch (error) {
+		console.warn(error);
+		return null;
+	}
+};
