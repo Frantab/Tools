@@ -3,7 +3,8 @@ import * as Api from './Api';
 /**
  * This function appends one or more HTML elements (childs) to HTML element (parent).
  * @param {HTMLElement} parent - HTML parent element
- * @param {array<HTMLElement>} childs - Array of HTML elements
+ * @param {array<HTMLElement>} children - Array of HTML elements
+ * @return {boolean}
  * @example
  * const parent = document.body;
  * const child1 = document.body.querySelector('.class1');
@@ -11,8 +12,8 @@ import * as Api from './Api';
  *
  * appendChilds(parent, child1, child2);
  */
-export const appendChilds = (parent, ...childs) => {
-	return !parent ? false : !childs.some(child => {
+export const appendChilds = (parent, ...children) => {
+	return !parent ? false : !children.some(child => {
 		if (child) {
 			parent.appendChild(child);
 			return false;
@@ -103,13 +104,13 @@ export const dispatchCustomEvent = (type, data = {}) => {
 
 /**
  * This function converts NodeList into an array.
- * @param {object} array - Nodelist which we want to convert into an array
+ * @param {object} nodeList - Nodelist which we want to convert into an array
  * @return {array}
  * @example
  * const elements = document.querySelectorAll('p');
  * const elementsInArray = nodeListToArray(elements);
  */
-export const nodeListToArray = (array) => Array.prototype.slice.call(array);
+export const nodeListToArray = nodeList => Array.prototype.slice.call(nodeList);
 
 /**
  * This function removes class from the HTML element.
@@ -156,6 +157,7 @@ export const addClass = (element, className) => {
  * This function will create and send POST request.
  * @param {string} url - Requested url.
  * @param {{data: object, resolve: function, reject: function, async: boolean}} config - Configuration of request.
+ * @return {XMLHttpRequest}
  * @example
  * const config = {
  * 		data: {message: 'Hi!'},
@@ -164,8 +166,7 @@ export const addClass = (element, className) => {
  * 		async: true
  * };
  *
- * const request = get('www.bachrony.com/something', config);
- * @return {XMLHttpRequest}
+ * const request = post('www.bachrony.com/something', config);
  */
 export const post = (url, config = {}) => Api.request('POST', url, config);
 
@@ -173,6 +174,7 @@ export const post = (url, config = {}) => Api.request('POST', url, config);
  * This function will create and send GET request.
  * @param {string} url - Requested url.
  * @param {{data: object, resolve: function, reject: function, async: boolean}} config - Configuration of request.
+ * @return {XMLHttpRequest}
  * @example
  * const config = {
  * 		resolve: response => console.log(response),
@@ -181,7 +183,6 @@ export const post = (url, config = {}) => Api.request('POST', url, config);
  * };
  *
  * const request = get('www.bachrony.com/something', config);
- * @return {XMLHttpRequest}
  */
 export const get = (url, config = {}) => Api.request('GET', url, config);
 
@@ -192,6 +193,18 @@ export const get = (url, config = {}) => Api.request('GET', url, config);
  * @param {string} key - Name of variable of an object. This variable will be re-setted.
  * @param {function} newImplementation - This function will be new implementation of object[key].
  * @returns {object} original re-setted object.
+ * @example
+ * const object = XMLHttpRequest.prototype;
+ * const key = 'open';
+ * const oldOpen = monkeyPatch(object, key, function() {
+ * 		console.log('I am in XMLHttpRequest.open function :-).');
+ * 		if (oldOpen) {
+ * 			oldOpen.apply(this, arguments);
+ * 		}
+ * });
+ * const request = new XMLHttpRequest();
+ *
+ * request.open('POST', '/');
  */
 export const monkeyPatch = (object, key, newImplementation) => {
 	try {
