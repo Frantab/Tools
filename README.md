@@ -20,7 +20,7 @@ import * as Tools from '@brandund/tools';
 ### 3) Use tools!
 for example:
 ```javascript
-const newElement = Tools.createWholeElement('div', {
+const newElement = Tools.createHTMLElement('div', {
     'class': ['class1', 'class2', 'class3'],
     'data-id': '1234'
 });
@@ -28,22 +28,22 @@ const newElement = Tools.createWholeElement('div', {
 
 ## Documentation
 Documentation taken from code.
- * [appendChilds](#appendChilds) - This function appends one or more HTML elements (childs) to HTML element (parent).
- * [createWholeElement](#createWholeElement) - This function create HTML element.
- * [addListeners](#addListeners) - This function add listener for event on the HTML element or elements.
- * [removeListeners](#removeListeners) - This function removes listener for event on the HTML element or elements.
+ * [appendChildren](#appendChildren) - This function appends one or more HTML elements (children) to HTML element (parent).
+ * [createHTMLElement](#createHTMLElement) - This function creates HTML element.
+ * [addListeners](#addListeners) - This function adds event listener on the HTML elements.
+ * [removeListeners](#removeListeners) - This function removes event listener from the HTML elements.
  * [dispatchCustomEvent](#dispatchCustomEvent) - This function invokes custom event.
  * [nodeListToArray](#nodeListToArray) - This function converts NodeList into an array.
  * [removeClass](#removeClass) - This function removes class from the HTML element.
  * [addClass](#addClass) - This function adds class to an HTML element.
- * [post](#post) - This function will create and send POST request.
- * [get](#get) - This function will create and send GET request.
+ * [post](#post) - This function creates and sends POST request.
+ * [get](#get) - This function creates and sends GET request.
  * [monkeyPatch](#monkeyPatch) - This function rewrites existing variable of an object. It can rewrite only variables which are type of function.
 ___
-## appendChilds
-`appendChilds(parent, ...children)`
+## appendChildren
+`appendChildren(parent, ...children)`
 
-This function appends one or more HTML elements (childs) to HTML element (parent).
+This function appends one or more HTML elements (children) to HTML element (parent).
  * @param `{HTMLElement} parent` - HTML parent element
  * @param `{array<HTMLElement>} children` - Array of HTML elements
  * @return `{boolean}`
@@ -54,20 +54,20 @@ const parent = document.body;
 const child1 = document.body.querySelector('.class1');
 const child2 = document.body.querySelector('.class2');
 
-appendChilds(parent, child1, child2);
+appendChildren(parent, child1, child2);
 ```
 ___
-## createWholeElement
-`createWholeElement(type, specifications = {})`
+## createHTMLElement
+`createHTMLElement(type, specifications = {})`
 
-This function create HTML element.
+This function creates HTML element.
  * @param `{string} type` - Type of HTML element (div, p, a, ...)
  * @param `{object} specifications` - Object which contains attributes for HTML element (class, name, type, ...)
  * @return `{HTMLElement}`
 
 example:
 ```js
-const newElement = createWholeElement('div', {
+const newElement = createHTMLElement('div', {
     'class': ['class1', 'class2', 'class3'],
     'data-id': 'div0001'
 });
@@ -76,7 +76,7 @@ ___
 ## addListeners
 `addListeners(event, fn, ...elements)`
 
-This function add listener for event on the HTML element or elements.
+This function adds event listener on the HTML elements.
  * @param `{string} event`- Type of event
  * @param `{function} fn` - Method which handle event (callback)
  * @param `{array<HTMLElement>} elements` - Array of HTML elements
@@ -95,7 +95,7 @@ ___
 ## removeListeners
 `removeListeners(event, fn, ...elements)`
 
-This function removes listener for event on the HTML element or elements.
+This function removes event listener from the HTML elements.
  * @param `{string} event` - Type of event
  * @param `{function} fn` - Method which handle event (callback)
  * @param `{array<HTMLElement>} elements` - Array of HTML elements
@@ -144,7 +144,7 @@ ___
 
 This function removes class from the HTML element.
  * @param `{HTMLElement} element` - HTML element.
- * @param `{string} className` - Class which will be delete.
+ * @param `{string} className` - Class which will be deleted.
 
 example:
 ```js
@@ -158,7 +158,7 @@ ___
 
 This function adds class to an HTML element.
  * @param `{HTMLElement} element` - HTML element.
- * @param `{string} className` - Class which will be delete.
+ * @param `{string} className` - Class which will be deleted.
 
 example:
 ```js
@@ -170,7 +170,7 @@ ___
 ## post
 `post(url, config = {})`
 
-This function will create and send POST request.
+This function creates and sends POST request.
  * @param `{string} url` - Requested url.
  * @param `{{data: object, resolve: function, reject: function, async: boolean}} config` - Configuration of request.
  * @return `{XMLHttpRequest}`
@@ -190,7 +190,7 @@ ___
 ## get
 `get(url, config = {})`
 
-This function will create and send GET request.
+This function creates and sends GET request.
  * @param `{string} url` - Requested url.
  * @param `{{data: object, resolve: function, reject: function, async: boolean}} config` - Configuration of request.
  * @return `{XMLHttpRequest}`
