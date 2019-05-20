@@ -18,7 +18,7 @@ export const _process = (request, resolve, reject) => {
 };
 
 /**
- * This function do whole process of XMLHttpRequest.
+ * This function does whole process of XMLHttpRequest.
  * @param {string} method - Method of request (POST, GET).
  * @param {string} url - Requested url.
  * @param {{data: object, resolve: function, reject: function, async: boolean}} customConfig - Configuration of request.
