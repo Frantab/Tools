@@ -1,13 +1,13 @@
 import * as Tools from '../Tools';
 import * as Api from '../Api';
 
-describe('Test of appendChilds.', () => {
-	test('Function appendChilds should append 1 child.', () => {
+describe('Test of appendChildren.', () => {
+	test('Function appendChildren should append 1 child.', () => {
 		const parent = document.body;
 		const div = document.createElement('div');
 
 		div.id = 'child';
-		Tools.appendChilds(parent, div);
+		Tools.appendChildren(parent, div);
 
 		const child = document.querySelector('body #child');
 
@@ -15,14 +15,14 @@ describe('Test of appendChilds.', () => {
 		expect(child.parentNode === parent).toBeTruthy();
 	});
 
-	test('Function appendChilds should append 2 childern.', () => {
+	test('Function appendChildren should append 2 childern.', () => {
 		const parent = document.body;
 		const div1 = document.createElement('div');
 		const div2 = document.createElement('div');
 
 		div1.id = 'child1';
 		div2.id = 'child2';
-		Tools.appendChilds(parent, div1, div2);
+		Tools.appendChildren(parent, div1, div2);
 
 		const child1 = document.querySelector('body #child1');
 		const child2 = document.querySelector('body #child2');
@@ -33,33 +33,33 @@ describe('Test of appendChilds.', () => {
 		expect(child2.parentNode === parent).toBeTruthy();
 	});
 
-	test('Function appendChilds should return false because of undefined parent.', () => {
+	test('Function appendChildren should return false because of undefined parent.', () => {
 		const parent = undefined;
 		const p = document.createElement('p');
 
-		expect(Tools.appendChilds(parent, p)).toBeFalsy();
+		expect(Tools.appendChildren(parent, p)).toBeFalsy();
 	});
 
-	test('Function appendChilds should return false because of one undefined child.', () => {
+	test('Function appendChildren should return false because of one undefined child.', () => {
 		const parent = document.body;
 		const p1 = document.createElement('p');
 		const p2 = undefined;
 
-		expect(Tools.appendChilds(parent, p1, p2)).toBeFalsy();
+		expect(Tools.appendChildren(parent, p1, p2)).toBeFalsy();
 	});
 
-	test('Function appendChilds should return false because of one undefined child.', () => {
+	test('Function appendChildren should return false because of one undefined child.', () => {
 		const parent = document.body;
 		const p1 = document.createElement('p');
 		const p2 = document.createElement('p');
 
-		expect(Tools.appendChilds(parent, p1, p2)).toBeTruthy();
+		expect(Tools.appendChildren(parent, p1, p2)).toBeTruthy();
 	});
 });
 
-describe('Test of createWholeElement.', () => {
-	test('Function createWholeElement should create div element with id: "test" and class "testClass".', () => {
-		const element = Tools.createWholeElement('div', {
+describe('Test of createHTMLElement.', () => {
+	test('Function createHTMLElement should create div element with id: "test" and class "testClass".', () => {
+		const element = Tools.createHTMLElement('div', {
 			id: 'test',
 			class: ['testClass']
 		});
@@ -69,8 +69,8 @@ describe('Test of createWholeElement.', () => {
 		expect(element.className).toBe('testClass');
 	});
 
-	test('Function createWholeElement should create div element with className: "testClass class superClass".', () => {
-		const element = Tools.createWholeElement('div', {
+	test('Function createHTMLElement should create div element with className: "testClass class superClass".', () => {
+		const element = Tools.createHTMLElement('div', {
 			class: ['testClass', 'class', 'superClass']
 		});
 
@@ -78,32 +78,32 @@ describe('Test of createWholeElement.', () => {
 		expect(element.className).toBe('testClass class superClass');
 	});
 
-	test('Function createWholeElement should create div element with data-id: "test".', () => {
-		const element = Tools.createWholeElement('div', {
+	test('Function createHTMLElement should create div element with data-id: "test".', () => {
+		const element = Tools.createHTMLElement('div', {
 			'innerHTML': 'test'
 		});
 
 		expect(element.innerHTML).toBe('test');
 	});
 
-	test('Function createWholeElement should create div element with data-id: "test".', () => {
-		const element = Tools.createWholeElement('div', {
+	test('Function createHTMLElement should create div element with data-id: "test".', () => {
+		const element = Tools.createHTMLElement('div', {
 			'innerText': 'test'
 		});
 
 		expect(element.innerText).toBe('test');
 	});
 
-	test('Function createWholeElement should create div element with data-id: "test".', () => {
-		const element = Tools.createWholeElement('div', {
+	test('Function createHTMLElement should create div element with data-id: "test".', () => {
+		const element = Tools.createHTMLElement('div', {
 			'data-id': 'test'
 		});
 
 		expect(element.getAttribute('data-id')).toBe('test');
 	});
 
-	test('Function createWholeElement should create div element with no specs.', () => {
-		const element = Tools.createWholeElement('div');
+	test('Function createHTMLElement should create div element with no specs.', () => {
+		const element = Tools.createHTMLElement('div');
 
 		expect(element.nodeName).toBe('DIV');
 	});

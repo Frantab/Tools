@@ -1,7 +1,7 @@
 import * as Api from './Api';
 
 /**
- * This function appends one or more HTML elements (childs) to HTML element (parent).
+ * This function appends one or more HTML elements (children) to HTML element (parent).
  * @param {HTMLElement} parent - HTML parent element
  * @param {array<HTMLElement>} children - Array of HTML elements
  * @return {boolean}
@@ -10,9 +10,9 @@ import * as Api from './Api';
  * const child1 = document.body.querySelector('.class1');
  * const child2 = document.body.querySelector('.class2');
  *
- * appendChilds(parent, child1, child2);
+ * appendChildren(parent, child1, child2);
  */
-export const appendChilds = (parent, ...children) => {
+export const appendChildren = (parent, ...children) => {
 	return !parent ? false : !children.some(child => {
 		if (child) {
 			parent.appendChild(child);
@@ -23,17 +23,17 @@ export const appendChilds = (parent, ...children) => {
 };
 
 /**
- * This function create HTML element.
+ * This function creates HTML element.
  * @param {string} type - Type of HTML element (div, p, a, ...)
  * @param {object} specifications - Object which contains attributes for HTML element (class, name, type, ...)
  * @return {HTMLElement}
  * @example
- * const newElement = createWholeElement('div', {
+ * const newElement = createHTMLElement('div', {
  *     'class': ['class1', 'class2', 'class3'],
  *     'data-id': 'div0001'
  * });
  */
-export const createWholeElement = (type, specifications = {}) => {
+export const createHTMLElement = (type, specifications = {}) => {
 	/** @type {HTMLElement} */
 	const newElement = document.createElement(type);
 
@@ -52,7 +52,7 @@ export const createWholeElement = (type, specifications = {}) => {
 };
 
 /**
- * This function add listener for event on the HTML element or elements.
+ * This function adds event listener on the HTML elements.
  * @param {string} event - Type of event
  * @param {function} fn - Method which handle event (callback)
  * @param {array<HTMLElement>} elements - Array of HTML elements
@@ -68,7 +68,7 @@ export const createWholeElement = (type, specifications = {}) => {
 export const addListeners = (event, fn, ...elements) => elements.forEach(element => element.addEventListener(event, fn));
 
 /**
- * This function removes listener for event on the HTML element or elements.
+ * This function removes event listener from the HTML elements.
  * @param {string} event - Type of event
  * @param {function} fn - Method which handle event (callback)
  * @param {array<HTMLElement>} elements - Array of HTML elements
@@ -115,7 +115,7 @@ export const nodeListToArray = nodeList => Array.prototype.slice.call(nodeList);
 /**
  * This function removes class from the HTML element.
  * @param {HTMLElement} element - HTML element.
- * @param {string} className - Class which will be delete.
+ * @param {string} className - Class which will be deleted.
  * @example
  * const paragraph = document.querySelector('p.paragraph--bold');
  *
@@ -140,7 +140,7 @@ export const removeClass = (element, className) => {
 /**
  * This function adds class to an HTML element.
  * @param {HTMLElement} element - HTML element.
- * @param {string} className - Class which will be delete.
+ * @param {string} className - Class which will be deleted.
  * @example
  * const paragraph = document.querySelector('p');
  *
@@ -154,7 +154,7 @@ export const addClass = (element, className) => {
 };
 
 /**
- * This function will create and send POST request.
+ * This function creates and sends POST request.
  * @param {string} url - Requested url.
  * @param {{data: object, resolve: function, reject: function, async: boolean}} config - Configuration of request.
  * @return {XMLHttpRequest}
@@ -171,7 +171,7 @@ export const addClass = (element, className) => {
 export const post = (url, config = {}) => Api.request('POST', url, config);
 
 /**
- * This function will create and send GET request.
+ * This function creates and sends GET request.
  * @param {string} url - Requested url.
  * @param {{data: object, resolve: function, reject: function, async: boolean}} config - Configuration of request.
  * @return {XMLHttpRequest}
