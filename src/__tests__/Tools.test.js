@@ -323,3 +323,19 @@ describe('Test of monkeyPatch.', () => {
 		expect(window.test()).toBe('newTest');
 	});
 });
+
+describe('Test of removeAllChildren.', () => {
+	test('RemoveAllChildren should remove all 2 children from parent.', () => {
+		const parent = document.createElement('div');
+		const child1 = document.createElement('div');
+		const child2 = document.createElement('div');
+
+		parent.appendChild(child1);
+		parent.appendChild(child2);
+		document.body.appendChild(parent);
+
+		expect(parent.childElementCount).toBe(2);
+		Tools.removeAllChildren(parent);
+		expect(parent.childElementCount).toBe(0);
+	});
+});
