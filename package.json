@@ -1,6 +1,6 @@
 {
   "name": "@brandund/tools",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Javascript library full of useful functions.",
   "main": "src/Tools.js",
   "scripts": {
