@@ -228,3 +228,19 @@ export const monkeyPatch = (object, key, newImplementation) => {
 		return null;
 	}
 };
+
+/**
+ * This function removes all children of HTML node.
+ * @param {HTMLElement} parent - All children of this element will be removed.
+ * @example
+ * const parent = document.querySelector('div');
+ *
+ * console.log(parent.childElementCount); // For example 2
+ * removeAllChildren(parent);
+ * console.log(parent.childElementCount); // 0
+ */
+export const removeAllChildren = parent => {
+	while (parent.firstChild) {
+		parent.removeChild(parent.firstChild);
+	}
+};
